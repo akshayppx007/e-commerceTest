@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cloudinary = require("cloudinary").v2;
 const errorMiddleware = require("./middlewares/error");
+const path = require("path");
 
 const app = express();
 
@@ -16,6 +17,8 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// serve static files
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // routes
 const user = require("./routes/userRoutes");
@@ -29,6 +32,10 @@ app.use("/api/v1", user);
 app.use("/api/v1", product);
 app.use("/api/v1", cart);
 
+// Catch-all route to serve the React app
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+});
 
 // error middleware
 app.use(errorMiddleware);
