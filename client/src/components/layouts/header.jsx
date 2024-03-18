@@ -131,11 +131,19 @@ const Header = ({ userData, handleSearchTerm, guestCartChange, guestCartDelete }
         >
           <ul>
             <li>
+            {userData?.user ? (
+              <Button
+                variant="text" color="blue-gray"
+                type="button"
+                onClick={handleLogout}
+              >
+                logout
+              </Button>) : (
               <Link to={"/login"}>
                 <Button variant="text" color="blue-gray">
                   Sign in
                 </Button>
-              </Link>
+              </Link>)}
             </li>
 
             <li>
