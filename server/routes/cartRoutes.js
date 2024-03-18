@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.route("/cart/add").post(addToCart);
-router.route("/cart/delete").put(isAuthenticatedUser, deleteCartItem);
+router.route("/cart/delete/:id").put(isAuthenticatedUser, deleteCartItem);
 router.route("/user/cart").get(isAuthenticatedUser, getUserCart);
 
 module.exports = router;

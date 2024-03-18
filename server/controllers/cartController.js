@@ -104,16 +104,21 @@ exports.addToCart = catchAsyncErrors(async (req, res, next) => {
 
 // delete cart item
 exports.deleteCartItem = catchAsyncErrors(async (req, res, next) => {
+  const decodeObjectId = (objectID) => {
+    return Buffer.from(objectID, "base64").toString("ascii");
+};
   const userId = req.user.id;
-  const productId = req.body;
+  const productId = decodeObjectId(req.params.id);
+ 
 
   const cart = await Cart.findOne({ userId });
 
-  const item = cart.products.find((item) => {
-    return item.productId === productId;
-  });
+  cart.products = cart.products.filter(item => (
+    item.productId.toString() !== productId));
+    
+    console.log(cart.products.filter(item => (
+      item.productId.toString() !== productId)))
 
-  cart.products.splice(cart.products.indexOf(item), 1);
   await cart.save();
 
   res.status(200).json({

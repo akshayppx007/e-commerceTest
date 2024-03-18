@@ -60,8 +60,7 @@ const Cart = ({ userData, handleGuestCartDelete }) => {
 
   const handleDelete = (itemId) => {
     if (userData) {
-      console.log(itemId)
-      deleteCartItem(itemId)
+      deleteCartItem(btoa(itemId))
     } else {
       const index = cartItems.findIndex((item) => item.productId === itemId);
       cartItems.splice(index, 1);
