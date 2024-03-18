@@ -103,7 +103,7 @@ const Cart = ({ userData, handleGuestCartDelete }) => {
                     <div className="ml-4">
                       <Typography variant="h6">{item.productId.name || item.name}</Typography>
                       <Typography color="gray" className="font-normal">
-                        Price: ${(item.productId.price * item.quantity).toFixed(2)}
+                        Price: ${((item.productId.price || item.price )* item.quantity).toFixed(2)}
                       </Typography>
                       <div className="flex items-center">
                         <IconButton
