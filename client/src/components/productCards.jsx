@@ -8,6 +8,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import addToCartMutation from "../actions/cart/addToCart";
+import toast from "react-hot-toast";
 
 export function ProductCard({productData, userData, guestCartChange}) {
   // const [cartItems, setCartItems] = useState([]);
@@ -67,6 +68,7 @@ export function ProductCard({productData, userData, guestCartChange}) {
       }
   
       localStorage.setItem('guestCart', JSON.stringify(guestCart));
+      toast.success("item added to cart");
     }
   };
 
