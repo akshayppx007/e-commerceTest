@@ -50,10 +50,7 @@ const Header = ({ userData, handleSearchTerm, guestCartChange, guestCartDelete }
     logout();
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearchTerm(e.target.value);
-  };
+
   const toggleMobileMenu = () => setShowMobileMenu(!showMobileMenu);
 
   return (
@@ -70,16 +67,17 @@ const Header = ({ userData, handleSearchTerm, guestCartChange, guestCartDelete }
             </Typography>
           </Link>
           <div className="flex items-center gap-4">
-            <form onSubmit={handleSearch} className="relative">
+            <div className="relative">
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={() => handleSearchTerm(searchTerm)}
                 placeholder="Search products..."
                 className="border-blue-gray-200 pr-10 pl-5 py-2 text-blue-gray-600 transition-all focus:border-x-blue-gray-800 focus:ring focus:ring-blue-gray-800 rounded-md focus:outline-none"
               />
               <Button
-                type="submit"
+                type="button"
                 variant="text"
                 color="blue-gray"
                 onClick={() => handleSearchTerm(searchTerm)}
@@ -87,7 +85,7 @@ const Header = ({ userData, handleSearchTerm, guestCartChange, guestCartDelete }
               >
                 <MagnifyingGlassIcon className="h-4 w-4" strokeWidth={2} />
               </Button>
-            </form>
+              </div>
             <IconButton
               variant="text"
               color="blue-gray"
